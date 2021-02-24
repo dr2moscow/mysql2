@@ -137,13 +137,16 @@ ORDER BY amount_of_birthday DESC;
 
 -- Тема Агрегация, задание 3
 -- (по желанию) Подсчитайте произведение чисел в столбце таблицы
+INSERT INTO catalogs VALUES
+  (NULL, 'Процессоры'),
+  (NULL, 'Материнские платы'),
+  (NULL, 'Видеокарты'),
+  (NULL, 'Жесткие диски'),
+  (NULL, 'Оперативная память');
 
--- Выполнение задания №3. Сам создал таблицу, сам заполнил, сам посчитал
-CREATE TABLE cat (id SERIAL PRIMARY KEY, value INT NULL );
-INSERT INTO cat (value) VALUES (1), (2), (3), (4), (5);
-SELECT exp(SUM(ln(value))) summ FROM cat;
-
-
+                                               
+-- Выполнение задания №3. 
+SELECT EXP(SUM(ln(id))) summ FROM catalogs;
 
 
 
