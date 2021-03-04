@@ -73,8 +73,7 @@ ALTER TABLE
 
 ALTER TABLE
 	likes
-		ADD CONSTRAINT likes_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id),
-		ADD CONSTRAINT target_id_fk FOREIGN KEY (target_id) REFERENCES users(id);
+		ADD CONSTRAINT likes_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 ALTER TABLE 
 	friendship
