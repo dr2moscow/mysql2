@@ -57,23 +57,23 @@ CREATE TABLE posts (
 
 ALTER TABLE 
 	posts 
-		ADD CONSTRAINT post_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id); 
-		ADD CONSTRAINT post_community_id_fk FOREIGN KEY (community_id) REFERENCES communities(id); 
+		ADD CONSTRAINT post_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id),
+		ADD CONSTRAINT post_community_id_fk FOREIGN KEY (community_id) REFERENCES communities(id),
 		ADD CONSTRAINT post_media_id_fk FOREIGN KEY (media_id) REFERENCES media(id);
 
 ALTER TABLE 
 	communities_users 
-		ADD CONSTRAINT communities_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
+		ADD CONSTRAINT communities_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id),
 		ADD CONSTRAINT communities_users_community_id_fk FOREIGN KEY (community_id) REFERENCES communities(id);
 
 ALTER TABLE 
 	media
-		ADD CONSTRAINT media_type_id_fk FOREIGN KEY (media_type_id) REFERENCES media_types(id);
+		ADD CONSTRAINT media_type_id_fk FOREIGN KEY (media_type_id) REFERENCES media_types(id),
 		ADD CONSTRAINT media_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 ALTER TABLE
 	likes
-		ADD CONSTRAINT likes_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
+		ADD CONSTRAINT likes_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id),
 		ADD CONSTRAINT target_id_fk FOREIGN KEY (target_id) REFERENCES users(id);
 
 ALTER TABLE 
@@ -82,7 +82,7 @@ ALTER TABLE
 
 ALTER TABLE
 	friendship
-		ADD CONSTRAINT friendship_friend_id_fk FOREIGN KEY (friend_id) REFERENCES users(id);
+		ADD CONSTRAINT friendship_friend_id_fk FOREIGN KEY (friend_id) REFERENCES users(id),
 		ADD CONSTRAINT friendship_friendship_status_id_fk FOREIGN KEY (friendship_status_id) REFERENCES friendship_statuses(id);
 
 -- 3. Определить кто больше поставил лайков (всего) - мужчины или женщины?
