@@ -91,32 +91,59 @@ CREATE PROCEDURE my_users_million ()
  END //
 DELIMITER ;
 
-CALL my_users_million();
+DROP TABLE IF EXISTS users_test;
+CREATE TABLE users_test(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(10) NOT NULL,
+	birthday VARCHAR(10)
+);
+
+DROP PROCEDURE IF EXISTS my_users_million;
+DELIMITER //
+CREATE PROCEDURE my_users_million()
+BEGIN
+	DECLARE birthday VARCHAR(10);
+	DECLARE i INT DEFAULT 1;
+	WHILE i <= 999999 DO
+		SET birthday = CONCAT(FLOOR(RAND()*(2002-1960+1)+1960),'-',FLOOR(RAND()*(12-1+1)+1),'-',FLOOR(RAND()*(28-1+1)+1));
+		INSERT INTO users_test (name, birthday) VALUES 
+			('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+			('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+		    ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+	        ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+           	('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+			('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+		    ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+	        ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
+            ('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday);
+	END WHILE;
+END//
+DELIMITER ;
+
+CALL my_users_million;
+
+DROP TABLE IF EXISTS users_test ;
+CREATE TABLE users_test(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(10) NOT NULL,
+	birthday VARCHAR(10)
+) ;
+
+INSERT INTO users SELECT * FROM users_test ;
 
 -- Результат
-SELECT * FROM users LIMIT 20;
-id    |name     |birthday_at|created_at         |updated_at         |
-------|---------|-----------|-------------------|-------------------|
-     1|Геннадий | 1990-10-05|2021-03-06 18:19:23|2021-03-06 18:19:23|
-     2|Наталья  | 1984-11-12|2021-03-06 18:19:23|2021-03-06 18:19:23|
-     3|Александр| 1985-05-20|2021-03-06 18:19:23|2021-03-06 18:19:23|
-     4|Сергей   | 1988-02-14|2021-03-06 18:19:23|2021-03-06 18:19:23|
-     5|Иван     | 1998-01-12|2021-03-06 18:19:23|2021-03-06 18:19:23|
-     6|Мария    | 1992-08-29|2021-03-06 18:19:23|2021-03-06 18:19:23|
-    10|Ivan     | 1976-01-01|2021-03-16 18:44:01|2021-03-16 18:44:01|
-    11|Ivan     | 1976-01-01|2021-03-16 18:50:49|2021-03-16 18:50:49|
-236792|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236793|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236794|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236795|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236796|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236797|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236798|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236799|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236800|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236801|Иван     | 2021-03-16|2021-03-16 19:28:20|2021-03-16 19:28:20|
-236802|Ivan     | 1976-01-01|2021-03-16 19:30:38|2021-03-16 19:30:38|
-236803|Иван     | 2021-03-16|2021-03-16 19:32:24|2021-03-16 19:32:24|
+SELECT * FROM users_test ORDER BY id DESC LIMIT 20;
 
 SELECT * FROM logs LIMIT 20;
 id    |table_name|value_name|created_at         |
