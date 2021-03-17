@@ -104,7 +104,7 @@ CREATE PROCEDURE my_users_million()
 BEGIN
 	DECLARE birthday VARCHAR(10);
 	DECLARE i INT DEFAULT 1;
-	WHILE i <= 999999 DO
+	WHILE i <= 5000 DO
 		SET birthday = CONCAT(FLOOR(RAND()*(2002-1960+1)+1960),'-',FLOOR(RAND()*(12-1+1)+1),'-',FLOOR(RAND()*(28-1+1)+1));
 		INSERT INTO users_test (name, birthday) VALUES 
 			('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),('Иван', birthday),
